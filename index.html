@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perler 拼豆图纸生成器</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bean-deco bean-1"></div>
+  <div class="bean-deco bean-2"></div>
+  <div class="bean-deco bean-3"></div>
+  <div class="bean-deco bean-4"></div>
+  <div class="bean-deco bean-5"></div>
+
+  <header class="app-header">
+    <h1> Perler 拼豆图纸生成器</h1>
+    <p>上传图片 → 像素化 → 匹配 Perler 基础色 → 导出带网格与色号的拼豆图纸</p>
+  </header>
+
+  <main class="app-main">
+    <section class="panel control-panel">
+      <!-- 上传区域 -->
+      <label class="upload-box">
+        <input type="file" id="imageInput" />
+        <span class="upload-icon">🖼️</span>
+        <span id="uploadText" class="upload-text">点击上传参考图片</span>
+      </label>
+
+      <!-- 控制项区域（已优化对齐） -->
+      <div class="control-row">
+        <label class="field">
+          图纸宽度
+          <div class="input-group">
+            <input type="number" id="patternWidth" value="48" min="8" max="200" />
+            <span class="suffix">格</span>
+          </div>
+        </label>
+
+        <label class="field">
+          最大颜色数
+          <div class="input-group">
+            <input type="number" id="maxColors" value="24" min="2" max="60" />
+          </div>
+        </label>
+
+        <label class="check">
+          <input type="checkbox" id="showGrid" checked />
+          网格线
+        </label>
+
+        <label class="check">
+          <input type="checkbox" id="showCodes" checked />
+          色号标记
+        </label>
+
+        <button id="generateBtn" disabled>生成图纸</button>
+        <button id="exportBtn" class="export-btn" disabled>导出 PNG</button>
+      </div>
+
+      <p class="hint">提示：图纸宽度越大，细节越多，但拼豆数量也会增加。</p>
+    </section>
+
+    <section class="workspace">
+      <div class="canvas-card">
+        <canvas id="patternCanvas"></canvas>
+        <p class="empty-tip" id="emptyTip">上传并生成后，图纸会显示在这里</p>
+      </div>
+
+      <aside class="palette-card" id="paletteCard">
+        <h2> 颜色清单</h2>
+        <div id="paletteList" class="palette-list"></div>
+        <div id="summary" class="summary"></div>
+      </aside>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
